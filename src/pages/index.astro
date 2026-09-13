@@ -1,0 +1,94 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { categories, resources } from "../data/resources.js";
+---
+<Layout>
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <span class="badge">100% Free Resources</span>
+        <h1>Welcome to <span class="highlight">Bilal Creative Tech</span></h1>
+        <p>Free thumbnail packs, video assets, icons, templates and more — made for creators, editors & designers.</p>
+        <form class="search-bar">
+          <input type="text" placeholder="Search resources..." />
+          <button type="submit">Search</button>
+        </form>
+      </div>
+      <div class="hero-image">
+        <img src="/images/bl.png" alt="Bilal Creative Tech" />
+      </div>
+    </div>
+  </section>
+
+  <section class="categories">
+    <div class="container">
+      <h2>Browse Categories</h2>
+      <div class="category-grid">
+        {categories.map(cat => (
+          <a href={`/category/${cat.slug}`} class="category-card">
+            <div class="cat-icon">{cat.icon}</div>
+            <h3>{cat.name}</h3>
+            <p>{cat.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="latest">
+    <div class="container">
+      <h2>Latest Resources</h2>
+      <div class="resource-grid">
+        {resources.slice(0,6).map(res => (
+          <a href={`/resource/${res.slug}`} class="resource-card">
+            <img src={res.thumbnail} alt={res.title} />
+            <div class="resource-info">
+              <h3>{res.title}</h3>
+              <p>{res.shortDescription}</p>
+              <span class="btn">View Pack</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .hero { padding: 64px 0; background: linear-gradient(180deg, #fffbea 0%, #ffffff 100%); }
+    .hero-inner { display:flex; align-items:center; gap:48px; }
+    .hero-text { flex:1; }
+    .badge { display:inline-block; background: var(--yellow); color:#000; font-weight:700; font-size:0.8rem; padding:6px 14px; border-radius:20px; margin-bottom:16px; }
+    .hero-text h1 { font-size:2.6rem; font-weight:800; line-height:1.2; margin-bottom:16px; }
+    .highlight { color:#000; background: var(--yellow); padding:0 8px; border-radius:6px; }
+    .hero-text p { color: var(--gray); font-size:1.1rem; margin-bottom:28px; max-width:480px; }
+    .search-bar { display:flex; max-width:420px; }
+    .search-bar input { flex:1; padding:14px 18px; border:2px solid #eee; border-right:none; border-radius:10px 0 0 10px; font-size:1rem; outline:none; }
+    .search-bar button { background: var(--dark); color:#fff; border:none; padding:0 24px; border-radius:0 10px 10px 0; font-weight:700; cursor:pointer; }
+    .hero-image img { width:280px; height:280px; object-fit:cover; border-radius:50%; border:6px solid var(--yellow); box-shadow:0 20px 40px rgba(0,0,0,0.12); }
+
+    .categories { padding:64px 0; background: var(--light-bg); }
+    .categories h2, .latest h2 { font-size:1.8rem; font-weight:800; margin-bottom:32px; text-align:center; }
+    .category-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:24px; }
+    .category-card { background:#fff; padding:28px; border-radius:14px; text-align:center; box-shadow:0 4px 16px rgba(0,0,0,0.05); transition: transform 0.2s; }
+    .category-card:hover { transform: translateY(-6px); }
+    .cat-icon { font-size:2.2rem; margin-bottom:12px; }
+    .category-card h3 { font-size:1.1rem; margin-bottom:6px; }
+    .category-card p { color: var(--gray); font-size:0.9rem; }
+
+    .latest { padding:64px 0; }
+    .resource-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:24px; }
+    .resource-card { display:block; background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,0.06); transition: transform 0.2s; }
+    .resource-card:hover { transform: translateY(-6px); }
+    .resource-card img { width:100%; height:160px; object-fit:cover; }
+    .resource-info { padding:18px; }
+    .resource-info h3 { font-size:1.05rem; margin-bottom:6px; }
+    .resource-info p { color: var(--gray); font-size:0.9rem; margin-bottom:14px; }
+    .btn { display:inline-block; background: var(--yellow); color:#000; font-weight:700; padding:8px 16px; border-radius:8px; font-size:0.9rem; }
+
+    @media (max-width: 768px) {
+      .hero-inner { flex-direction: column; text-align:center; }
+      .hero-text p { margin-left:auto; margir-right:auto; }
+      .search-bar { margin: 0 auto; }
+    }
+  </style>
+</Layout>

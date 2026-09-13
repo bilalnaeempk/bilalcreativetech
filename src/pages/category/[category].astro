@@ -1,0 +1,14 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { categories, resources } from "../../data/resources.js";
+
+export function getStaticPaths() {
+  return categories.map(cat => ({
+    params: { category: cat.slug },
+  }));
+}
+
+const { category } = Astro.params;
+const currentCategory = categories.find(c => c.slug === category);
+const categoryResources = resources.filter(r => r.category === category);
+---

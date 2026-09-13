@@ -1,8 +1,0 @@
-{
-  "name": "bilalcreativetech",
-  "compatibility_date": "2026-09-13",
-  "assets": {
-    "directory": "./",
-    "not_found_handling": "404-page"
-  }
-}

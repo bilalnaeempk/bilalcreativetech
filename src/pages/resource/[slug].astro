@@ -1,0 +1,19 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { categories, resources } from "../../data/resources.js";
+
+export function getStaticPaths() {
+  return resources.map(res => ({
+    params: { slug: res.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const resource = resources.find(r => r.slug === slug);
+
+if (!resource) {
+  throw new Error(`Resource not found for slug: ${slug}`);
+}
+
+const category = categories.find(c => c.slug === resource.category);
+---
